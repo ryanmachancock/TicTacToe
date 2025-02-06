@@ -12,7 +12,6 @@ public class Main {
             String[][] gameBoard = initializeGameBoard();
             HashMap<Integer, Integer> movesAlreadyUsed = new HashMap<>();
             boolean isPlayer1 = true;
-            boolean isGameOver = false;
             int winner = 0; // 0 is default // 1 is player 1 // 2 is Player 2
             int round = 1;
 
@@ -25,7 +24,7 @@ public class Main {
                 int input = movesAlreadyUsed.get(round);
                 placePiece(input, gameBoard, isPlayer1);
                 isPlayer1 = !isPlayer1;
-                winner = checkForWinner(gameBoard, isGameOver);
+                winner = checkForWinner(gameBoard);
                 round++;
             }
 
@@ -89,54 +88,38 @@ public class Main {
         }
     }
 
-    private static int checkForWinner(String[][] gameBoard, boolean isGameOver) {
+    private static int checkForWinner(String[][] gameBoard) {
         if (gameBoard[0][0].equals("X") && gameBoard[0][1].equals("X") && gameBoard[0][2].equals("X")) {
-            isGameOver = true;
             return 1;
         } else if (gameBoard[1][0].equals("X") && gameBoard[1][1].equals("X") && gameBoard[1][2].equals("X")) {
-            isGameOver = true;
             return 1;
         } else if (gameBoard[2][0].equals("X") && gameBoard[2][1].equals("X") && gameBoard[2][2].equals("X")) {
-            isGameOver = true;
             return 1;
         } else if (gameBoard[0][0].equals("X") && gameBoard[1][0].equals("X") && gameBoard[2][0].equals("X")) {
-            isGameOver = true;
             return 1;
         } else if (gameBoard[0][1].equals("X") && gameBoard[1][1].equals("X") && gameBoard[2][1].equals("X")) {
-            isGameOver = true;
             return 1;
         } else if (gameBoard[0][2].equals("X") && gameBoard[1][2].equals("X") && gameBoard[2][2].equals("X")) {
-            isGameOver = true;
             return 1;
         } else if (gameBoard[0][0].equals("X") && gameBoard[1][1].equals("X") && gameBoard[2][2].equals("X")) {
-            isGameOver = true;
             return 1;
         } else if (gameBoard[2][0].equals("X") && gameBoard[2][2].equals("X") && gameBoard[0][2].equals("X")) {
-            isGameOver = true;
             return 1;
         } else if (gameBoard[0][0].equals("O") && gameBoard[0][1].equals("O") && gameBoard[0][2].equals("O")) {
-            isGameOver = true;
             return 2;
         } else if (gameBoard[1][0].equals("O") && gameBoard[1][1].equals("O") && gameBoard[1][2].equals("O")) {
-            isGameOver = true;
             return 2;
         } else if (gameBoard[2][0].equals("O") && gameBoard[2][1].equals("O") && gameBoard[2][2].equals("O")) {
-            isGameOver = true;
             return 2;
         } else if (gameBoard[0][0].equals("O") && gameBoard[1][0].equals("O") && gameBoard[2][0].equals("O")) {
-            isGameOver = true;
             return 2;
         } else if (gameBoard[0][1].equals("O") && gameBoard[1][1].equals("O") && gameBoard[2][1].equals("O")) {
-            isGameOver = true;
             return 2;
         } else if (gameBoard[0][2].equals("O") && gameBoard[1][2].equals("O") && gameBoard[2][2].equals("O")) {
-            isGameOver = true;
             return 2;
         } else if (gameBoard[0][0].equals("O") && gameBoard[1][1].equals("O") && gameBoard[2][2].equals("O")) {
-            isGameOver = true;
             return 2;
         } else if (gameBoard[2][0].equals("O") && gameBoard[2][2].equals("O") && gameBoard[0][2].equals("O")) {
-            isGameOver = true;
             return 2;
         }
 
@@ -232,7 +215,8 @@ public class Main {
         System.out.println("\n\n\n\n\n-----Would you like to play again? y/n-----");
         String answer = scanner.next();
         while (!(answer.equalsIgnoreCase("y") || answer.equalsIgnoreCase("n"))) {
-            System.out.println("Please answer with a single letter 'y' or 'n'");
+            clearScreen();
+            System.out.println("Invalid input: Please answer with a single letter 'y' or 'n'");
             isPlayAgain();
         }
         return answer.equalsIgnoreCase("y");
