@@ -168,10 +168,8 @@ public class Main {
                 if (count == userInput) {
                     if (isPlayer1) {
                         board[i][j] = "X";
-                        isPlayer1 = false;
                     } else {
                         board[i][j] = "O";
-                        isPlayer1 = true;
                     }
                     return;
                 }
