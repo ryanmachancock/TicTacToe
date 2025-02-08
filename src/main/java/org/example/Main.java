@@ -39,17 +39,9 @@ public class Main {
     private static void displayGameInfo(boolean isPlayer1, int round) {
 
         if (isPlayer1) {
-            System.out.println("---------------------------------------------------");
-            System.out.println("----------------- ROUND: " + round + "         ----------------");
-            System.out.println("----------------- Player " + 1 + " to move ----------------");
-            System.out.println("----------------- Placing X        ----------------");
-            System.out.println("---------------------------------------------------");
+            addSquiglyLines(String.format("-- ROUND %1d -- Player 1 to move -- Placing 'X' --", round));
         } else {
-            System.out.println("---------------------------------------------------");
-            System.out.println("----------------- ROUND: " + round + "         ----------------");
-            System.out.println("----------------- Player " + 2 + " to move ----------------");
-            System.out.println("----------------- Placing O        ----------------");
-            System.out.println("---------------------------------------------------");
+            addSquiglyLines(String.format("-- ROUND %1d -- Player 2 to move -- Placing 'O' --", round));
         }
     }
 
@@ -66,26 +58,23 @@ public class Main {
 
     private static void displayGameOver(int winner) {
         if (winner == 1) {
-            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-            System.out.println("\nCongratulations player 1, you are the winner!!!\n");
-            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            clearScreen();
+            addSquiglyLines("\nCongratulations player 1, you are the winner!!!\n");
         } else if (winner ==2 ){
             clearScreen();
-            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-            System.out.println("\nCongratulations player 2, you are the winner!!!\n");
-            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-
+            addSquiglyLines("\nCongratulations player 2, you are the winner!!!\n");
         } else {
-            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-            System.out.println("\nOh no, you tied!\n");
-            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            clearScreen();
+            addSquiglyLines("\nOh no, you tied!\n");
         }
+    }
+
+    private static void addSquiglyLines(String output){
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println(output);
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     }
 
     private static int checkForWinner(String[][] gameBoard) {
@@ -128,7 +117,7 @@ public class Main {
 
     private static void displayCurrentBoard(String[][] gameBoard) {
 
-        System.out.println("\n-------------------\nGame Board:");
+        System.out.println("\nGame Board:\n-------------------");
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 System.out.print(gameBoard[i][j]);
@@ -173,7 +162,7 @@ public class Main {
     private static void displayBoardWithPositionMarkers() {
         int count = 1;
 
-        System.out.println("\n-------------------\nNumber Guide:");
+        System.out.println("\nNumber Guide:\n-------------------");
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 System.out.print(count);
@@ -192,7 +181,7 @@ public class Main {
     private static int getUserMove(HashMap<Integer, Integer> movesAlreadyUsed) {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("\n\nEnter a number [1-9] to select your placement");
+        addSquiglyLines("\n-- Enter a number [1-9] to select your placement --\n");
         String userInput = scanner.next();
         if (!userInput.matches("[1-9]")) {
             System.out.println("\n\n-----Error, please enter a single digit [1-9]-----");
@@ -211,7 +200,7 @@ public class Main {
     private static boolean isPlayAgain() {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("\n\n\n\n\n-----Would you like to play again? y/n-----");
+        addSquiglyLines("\n-----Would you like to play again? y/n-----\n");
         String answer = scanner.next();
         if (!(answer.equalsIgnoreCase("y") || answer.equalsIgnoreCase("n"))) {
             clearScreen();
