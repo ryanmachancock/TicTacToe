@@ -192,7 +192,6 @@ public class Main {
     private static int getUserMove(HashMap<Integer, Integer> movesAlreadyUsed) {
         Scanner scanner = new Scanner(System.in);
 
-        // TODO: implement error handling for input. need to disallow numbers already used
         System.out.println("\n\nEnter a number [1-9] to select your placement");
         String userInput = scanner.next();
         if (!userInput.matches("[1-9]")) {
@@ -214,10 +213,10 @@ public class Main {
 
         System.out.println("\n\n\n\n\n-----Would you like to play again? y/n-----");
         String answer = scanner.next();
-        while (!(answer.equalsIgnoreCase("y") || answer.equalsIgnoreCase("n"))) {
+        if (!(answer.equalsIgnoreCase("y") || answer.equalsIgnoreCase("n"))) {
             clearScreen();
             System.out.println("Invalid input: Please answer with a single letter 'y' or 'n'");
-            isPlayAgain();
+            return isPlayAgain();
         }
         return answer.equalsIgnoreCase("y");
     }
